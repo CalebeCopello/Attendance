@@ -12,8 +12,8 @@ def addAttRate(attRate, rowId):
 def listAllMembers():
     dbcursor.execute('SELECT rowid, lastName, Name, att FROM members')
     result = dbcursor.fetchall()
-    for result in result:
-        print(result)
+    #for result in result:
+    return result
 def deleteMember(rowId):
     dbcursor.execute('DELETE FROM members WHERE rowid = ?', (rowId))
     connection.commit()
@@ -51,7 +51,7 @@ insertName('Lima', 'Bryan Paim')
 #TODO make an function to reorder rowids after deleting one row, using commando below as guide
 #dbcursor.execute('UPDATE members SET rowid = {newRowId} WHERE rowid = {oldRowId}')
 
-listAllMembers()
+#print(listAllMembers())
 
 #Closing DB connection
 connection.close()
