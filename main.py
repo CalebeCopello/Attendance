@@ -3,6 +3,13 @@ import sqlite3 as sql
 
 
 #Functions
+#Connecting to db and creating a cursor
+def sqlOpen():
+    global connection
+    global dbcursor
+    connection = sql.connect('general.db')
+    dbcursor = connection.cursor()
+
 def insertName(lN, n):
     dbcursor.execute('INSERT INTO members (lastName, name) VALUES (?, ?)', (lN, n))
     connection.commit()
@@ -18,9 +25,8 @@ def deleteMember(rowId):
     dbcursor.execute('DELETE FROM members WHERE rowid = ?', (rowId))
     connection.commit()
 
-#Connecting to db and creating a cursor
-connection = sql.connect('general.db')
-dbcursor = connection.cursor()
+
+sqlOpen()
 
 #Creating the table if not exists
 try:
@@ -51,7 +57,14 @@ insertName('Lima', 'Bryan Paim')
 #TODO make an function to reorder rowids after deleting one row, using commando below as guide
 #dbcursor.execute('UPDATE members SET rowid = {newRowId} WHERE rowid = {oldRowId}')
 
-#print(listAllMembers())
+'''member = listAllMembers()
+c = 0
+while c < len(member):
+    i = 0
+    while i < len(member[c]):
+        print(member[c][i])
+        i += 1
+    c += 1'''
 
 #Closing DB connection
 connection.close()
